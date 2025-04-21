@@ -56,21 +56,23 @@ Tool gets invoked from the MCP Server.
 Result is returned and combined into a natural response by the agent.
 
 How It Works
+
 🔨 Step 1: Define MCP Tools
 
-# math_server.py
+   # math_server.py
 
-@math_mcp.tool()
-def add(a: int, b: int) -> int:
-    return a + b
+   @math_mcp.tool()
+   def add(a: int, b: int) -> int:
+       return a + b
 
-@math_mcp.tool()
-def multiply(a: int, b: int) -> int:
-    return a * b
+   @math_mcp.tool()
+   def multiply(a: int, b: int) -> int:
+       return a * b
 
 🔗 Step 2: Connect AI Agent to MCP Server
 
 async with stdio_client(server_parameters) as (read, write):
+
     async with ClientSession(read, write) as session:
         await session.initialize()
         mcp_tools = await load_mcp_tools(session)
